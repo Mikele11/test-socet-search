@@ -377,7 +377,7 @@ socket.on('change', function (usersOnline){
 			console.log('2222on online>',x)	
 				var online_user = $( this ).text().substring(0,$( this ).text().indexOf('Count')-1)
 				console.log('444on online>',usersOnline.indexOf(online_user ) != -1,online_user)	
-			  if (usersOnline.indexOf($( this ).text() ) != -1){
+			  if (usersOnline.indexOf(online_user ) != -1){
 				$( this ).css("background","greenyellow"); 
 				 console.log('333on online>',$( this ).css("background","greenyellow"))				  
 			  } 
@@ -386,7 +386,7 @@ socket.on('change', function (usersOnline){
 			console.log('off')
 			$('#user-list>p').each(function( index ) {
 			  console.log( 'each' );	
-			  if (usersOnline.indexOf($( this ).text() ) != -1){
+			  if (usersOnline.indexOf($( this ).text().substring(0,$( this ).text().indexOf('Count')-1) ) != -1){
 				$( this ).css("background","#d3d3eb");  
 			  } 
 			});
@@ -398,7 +398,7 @@ socket.on('oldcolors', function (usersOnline){
 	setTimeout(function(){
 		console.log('off online>',usersOnline)
 		$('#user-list>p').each(function( index ) {
-		  console.log( 'each oldcolors',(usersOnline.indexOf($( this ).text() ) == -1) );	
+		  console.log( 'each oldcolors',(usersOnline.indexOf($( this ).text().substring(0,$( this ).text().indexOf('Count')-1) ) == -1) );	
 		  if (usersOnline.indexOf($( this ).text() ) == -1){
 			$( this ).css("background","#d3d3eb");  
 		  } 
