@@ -377,6 +377,7 @@ socket.on('change', function (usersOnline){
 			console.log('2222on online>',x)	
 			  if (usersOnline.indexOf($( this ).text() ) != -1){
 				$( this ).css("background","greenyellow"); 
+				 console.log('333on online>',$( this ).css("background","greenyellow"))				  
 			  } 
 			});			
 		} else {
