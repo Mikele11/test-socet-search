@@ -169,23 +169,22 @@ $(document).on('click', '.room-menu', (ev) => {
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 $(document).on('click', '.userp', (ev) => {
-	current_user = $(ev.currentTarget).text();
-
-	
+	var current_user = $(ev.currentTarget).text();
+	var current_user_fix = current_user.substring(0,current_user.indexOf('Count')-1); 
 	
 	socket.emit('create room', {
-		room_id: current_user,
+		room_id: current_user_fix,
 		user_name: user_name
 	});
-	current_room = current_user;
-	socket.emit('fetch messages', current_user);
-	$('#current_room_id').text(current_user);
+	current_room = current_user_fix;
+	socket.emit('fetch messages', current_user_fix);
+	$('#current_room_id').text(current_user_fix);
 	$('#input-room-id').val("");
 	
 		
-	console.log('click to user',current_user);
-	if (current_user!=$('#response').text()){
-		var value = prompt("Send message to"+current_user+"<br>...:)",'');
+	console.log('click to user',current_user_fix,current_user_fix.length,$('#response').text(),$('#response').text().length,current_user_fix!=$('#response').text());
+	if (current_user_fix!=$('#response').text()){
+		var value = prompt("Send message to"+current_user_fix+"...:)",'');
 		var avatar;
 		if ($('#picrscr').val()==''){
 			avatar='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXPg-87YPJhgdeqQoAlUdgF60k6yi61LlpDtSXSqjWMVa9xbWVXQ';
@@ -194,17 +193,17 @@ $(document).on('click', '.userp', (ev) => {
 		}
 		if ((value!==null)&&(value>'')){
 			socket.emit('chat message', {
-				room_id: current_user,
+				room_id: current_user_fix,
 				user_avatar: avatar,		
 				user_name: user_name,
 				message: value
 			});
 		}
 	}
-	if (current_user==$('#response').text()){
+	if (current_user_fix==$('#response').text()){
 		
 		socket.emit('join', {
-			room_id: current_user,
+			room_id: current_user_fix,
 			user_name: user_name
 		});
 		
@@ -217,8 +216,8 @@ $(document).on('click', '.userp', (ev) => {
 				console.log('success user');				
 			}
 		});								
-		socket.emit('fetch message', current_user);
-		$('#current_room_id').text(current_user);		
+		socket.emit('fetch message', current_user_fix);
+		$('#current_room_id').text(current_user_fix);		
 	}
 	
 	return false;
