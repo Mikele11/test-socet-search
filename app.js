@@ -57,9 +57,6 @@ MongoClient.connect(MONGO_URL, function(err, db){
     });
 //-----кінець видалення	
 	
-	
-	
-
    io.on('connection', (socket) => {
 		//io.emit('fetch rooms', rooms);
 
@@ -177,21 +174,13 @@ MongoClient.connect(MONGO_URL, function(err, db){
 			oldColors();
 		});	
 	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
+	   	   
 		//-------------------------кінець отрисовки
 		
 		
 	});//socet
 
 }); 
-
-
 	
 	MongoClient.connect(MONGO_URL2, function(err, db){  
 	  if (err) {
