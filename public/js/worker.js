@@ -375,7 +375,8 @@ socket.on('change', function (usersOnline){
 			console.log('111on online>',x)
 			$('#user-list>p').each(function( index ) {
 			console.log('2222on online>',x)	
-				console.log('444on online>',usersOnline.indexOf($( this ).text() ) != -1,$( this ).text())	
+				var online_user = $( this ).text().substring(0,$( this ).text().indexOf('Count')-1)
+				console.log('444on online>',usersOnline.indexOf(online_user ) != -1,online_user)	
 			  if (usersOnline.indexOf($( this ).text() ) != -1){
 				$( this ).css("background","greenyellow"); 
 				 console.log('333on online>',$( this ).css("background","greenyellow"))				  
