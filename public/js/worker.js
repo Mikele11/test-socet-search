@@ -372,7 +372,9 @@ socket.on('change', function (usersOnline){
 		console.log('on online>',usersOnline)
 		if (navigator.onLine == true){
 			var x = document.getElementsByClassName("userp").length;
+			console.log('111on online>',x)
 			$('#user-list>p').each(function( index ) {
+			console.log('2222on online>',x)	
 			  if (usersOnline.indexOf($( this ).text() ) != -1){
 				$( this ).css("background","greenyellow"); 
 			  } 
