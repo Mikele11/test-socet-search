@@ -423,7 +423,7 @@ socket.on('chat message', (data_doc) => {
 		}	
 	});	
 	if (current_room == data_doc.room_id) {
-		$('#message-list').append('<p>' +'<img class="useravatar" src="'+ data_doc.log.user_avatar+'">'+ data_doc.log.user_name + '：' + data_doc.log.message + '&nbsp;&nbsp;&nbsp;<i class="fa fa-trash"><span class="idhiden">'+data_doc._id+'</span></i>'+'&nbsp;&nbsp;&nbsp;<i class="fas fa-check-circle"><span class="idhiden">'+v._id+'</span></i>'+'</p>');
+		$('#message-list').append('<p>' +'<img class="useravatar" src="'+ data_doc.log.user_avatar+'">'+ data_doc.log.user_name + '：' + data_doc.log.message + '&nbsp;&nbsp;&nbsp;<i class="fa fa-trash"><span class="idhiden">'+data_doc._id+'</span></i>'+'&nbsp;&nbsp;&nbsp;<i class="fas fa-check-circle"><span class="idhiden">'+data_doc._id+'</span></i>'+'</p>');
 	}
 
 });
