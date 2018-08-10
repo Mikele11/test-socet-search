@@ -77,7 +77,7 @@ MongoClient.connect(MONGO_URL, function(err, db){
 				new: true}, function (err, doc) {
 					res.json(doc);
 				}
-			});		
+			);		
 			
     });	
 	
