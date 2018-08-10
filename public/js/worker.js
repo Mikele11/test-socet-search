@@ -347,57 +347,58 @@ $(document).on('click', '.fa-trash', (ev) => {
 //--------------------------видалення кінець
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-----------------------
 $(document).on('click', '.fa-check-circle', (ev) => {
-	var name = $(ev.currentTarget).parent()[0].innerText;
+	var name = $(ev.currentTarget).parent()[0].innerText.substring($(ev.currentTarget).parent()[0].innerText.indexOf(':')+1,$(ev.currentTarget).parent()[0].innerText.indexOf('::') );
 	console.log($(ev.currentTarget).parent()[0].innerText);
 	console.log('rrrr',$(ev.currentTarget).parent()[0].innerText.indexOf('Time:'));
 	console.log('length>',$(ev.currentTarget).parent()[0].innerText.length);
 	console.log($(ev.currentTarget).parent()[0].innerText.substring($(ev.currentTarget).parent()[0].innerText.indexOf('Time:')+5,$(ev.currentTarget).parent()[0].innerText.length ));
 	var time = Number($(ev.currentTarget).parent()[0].innerText.substring($(ev.currentTarget).parent()[0].innerText.indexOf('Time:')+5,$(ev.currentTarget).parent()[0].innerText.length ));
-	var sender = {
-		fname: name,
-		user_paytime: time
-		};
-	console.log('put sender',sender);
-	$.ajax({
-		type: 'PUT',
-		data: JSON.stringify(sender),
-		contentType: 'application/json',
-		url: '/userlistsocet',						
-		success: function(data) {
-			console.log('success');			
-		},
-		error: function( jqXhr, textStatus, errorThrown ){
-			console.log(  jqXhr )
-			console.log(  textStatus )
-			console.log(  errorThrown )
-		}	
-	});
-	
-	$.ajax({
-		url: "/userlistsocet",
-		type: "GET",
-		data: '',
-		cache: false,
-		success: function(response){
-		console.log('1111',response)
-		var users=[];
-		
-			for (var i = 0; i < response.length; i++) {
-				users[i] = response[i];
-			}									
-			$('#user-list').empty();
-			users.forEach((v) => {
-				$('#user-list').append('<p class="userp">' +'<img class="useravatar_small" src="'+ v.user_avatar+'">'+ v.user_name+'<br/>'+'<span> Count time:</span>'+ v.user_paytime +'</p>');
-			}) 			 
-		},
-		error: function( jqXhr, textStatus, errorThrown ){
-			console.log(  jqXhr )
-			console.log(  textStatus )
-			console.log(  errorThrown )
-		}
-	});
+	if (time>0) {
+		var sender = {
+			fname: name,
+			user_paytime: time
+			};
+		console.log('put sender',sender);
+		$.ajax({
+			type: 'PUT',
+			data: JSON.stringify(sender),
+			contentType: 'application/json',
+			url: '/userlistsocet',						
+			success: function(data) {
+				console.log('success');			
+			},
+			error: function( jqXhr, textStatus, errorThrown ){
+				console.log(  jqXhr )
+				console.log(  textStatus )
+				console.log(  errorThrown )
+			}	
+		});
 
-	
+		$.ajax({
+			url: "/userlistsocet",
+			type: "GET",
+			data: '',
+			cache: false,
+			success: function(response){
+			console.log('1111',response)
+			var users=[];
+
+				for (var i = 0; i < response.length; i++) {
+					users[i] = response[i];
+				}									
+				$('#user-list').empty();
+				users.forEach((v) => {
+					$('#user-list').append('<p class="userp">' +'<img class="useravatar_small" src="'+ v.user_avatar+'">'+ v.user_name+'<br/>'+'<span> Count time:</span>'+ v.user_paytime +'</p>');
+				}) 			 
+			},
+			error: function( jqXhr, textStatus, errorThrown ){
+				console.log(  jqXhr )
+				console.log(  textStatus )
+				console.log(  errorThrown )
+			}
+		});
+
+	}
 	return false;
 });
 
