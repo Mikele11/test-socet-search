@@ -368,7 +368,7 @@ $(document).on('click', '.fa-check-circle', (ev) => {
 			contentType: 'application/json',
 			url: '/userlistsocet',						
 			success: function(data) {
-				console.log('success');			
+				console.log('success put', data);			
 			},
 			error: function( jqXhr, textStatus, errorThrown ){
 				console.log(  jqXhr )
