@@ -270,7 +270,6 @@ $(document).on('click', '.userp', (ev) => {
 						message: logs
 					});
 				}
-			}
 			if (current_user_fix==$('#response').text()){
 
 				socket.emit('join', {
