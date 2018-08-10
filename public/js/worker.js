@@ -338,7 +338,9 @@ $(document).on('click', '.fa-trash', (ev) => {
 				}	
 			}
 			$('#message-list').empty();
+
 			mess.forEach((v) => {
+				console.log('>>>v',v);
 				$('#message-list').append('<p>' +'<img class="useravatar" src="'+ v.log.user_avatar+'">'+ v.log.user_name + '：' + v.log.message + '&nbsp;&nbsp;&nbsp;<i class="fa fa-trash"><span class="idhiden">'+v._id+'</span></i>'+'&nbsp;&nbsp;&nbsp;<i class="fas fa-check-circle"><span class="idhiden">'+v._id+'</span></i>'+'</p>');
 			});
 		}
@@ -436,6 +438,7 @@ socket.on('chat message', (data_doc) => {
 socket.on('chat message init', (messages) => {
 	$('#message-list').empty();
 	messages.forEach((v) => {
+		console.log('>>>v1',v);
 		$('#message-list').append('<p>' +'<img class="useravatar" src="'+ v.log.user_avatar+'">'+ v.log.user_name + '：' + v.log.message + '&nbsp;&nbsp;&nbsp;<i class="fa fa-trash"><span class="idhiden">'+v._id+'</span></i>'+'&nbsp;&nbsp;&nbsp;<i class="fas fa-check-circle"><span class="idhiden">'+v._id+'</span></i>'+'</p>');
 	});
 });
