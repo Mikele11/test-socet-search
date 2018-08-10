@@ -427,6 +427,7 @@ socket.on('chat message', (data_doc) => {
 	}
 
 });
+//
 socket.on('chat message init', (messages) => {
 	$('#message-list').empty();
 	messages.forEach((v) => {
