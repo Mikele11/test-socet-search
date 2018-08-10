@@ -352,7 +352,7 @@ $(document).on('click', '.fa-check-circle', (ev) => {
 	console.log('rrrr',$(ev.currentTarget).parent()[0].innerText.indexOf('Time:'));
 	console.log('length>',$(ev.currentTarget).parent()[0].innerText.length);
 	console.log($(ev.currentTarget).parent()[0].innerText.substring($(ev.currentTarget).parent()[0].innerText.indexOf('Time:')+5,$(ev.currentTarget).parent()[0].innerText.length ));
-	var time = Nunber($(ev.currentTarget).parent()[0].innerText.substring($(ev.currentTarget).parent()[0].innerText.indexOf('Time:')+5,$(ev.currentTarget).parent()[0].innerText.length ));
+	var time = Number($(ev.currentTarget).parent()[0].innerText.substring($(ev.currentTarget).parent()[0].innerText.indexOf('Time:')+5,$(ev.currentTarget).parent()[0].innerText.length ));
 	var sender = {
 		fname: name,
 		user_paytime: time
