@@ -92,14 +92,12 @@ $('#post-message').on('submit', () => {
 	socket.emit('chat message', {
 		room_id: current_room,
 		user_avatar: avatar,		
-		user_name: user_name,
+		user_name: $('#input-user-name').val(),
 		message: $('#input-message').val()
 	});
 	$('#input-message').val("");
 	return false;
 })
-
-
 
 
 $('#post-search').on('submit', (e) => {
@@ -133,8 +131,6 @@ $('#post-search').on('submit', (e) => {
 $(document).on('click', '.сollapse', (ev) => {
 	$('#search-list').empty();
 });
-
-
 
 //зміна кімнати
 
@@ -253,7 +249,7 @@ $(document).on('click', '.userp', (ev) => {
 			time = $('#time').val();
 			task = $('#task').val();
 			
-					var avatar;
+		var avatar;
 		if ($('#picrscr').val()==''){
 			avatar='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXPg-87YPJhgdeqQoAlUdgF60k6yi61LlpDtSXSqjWMVa9xbWVXQ';
 		}else{
