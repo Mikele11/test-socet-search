@@ -353,6 +353,7 @@ $(document).on('click', '.fa-check-circle', (ev) => {
 	console.log('length>',$(ev.currentTarget).parent()[0].innerText.length);
 	console.log(':>',$(ev.currentTarget).parent()[0].innerText.indexOf(':'));
 	console.log('ww:>', $(ev.currentTarget).parent()[0].innerText.substring(0,$(ev.currentTarget).parent()[0].innerText.indexOf(':')));
+	console.log('name>',name.indexOf(':'),name.substring(0,name.indexOf(':')));
 	console.log($(ev.currentTarget).parent()[0].innerText.substring($(ev.currentTarget).parent()[0].innerText.indexOf('Time:')+5,$(ev.currentTarget).parent()[0].innerText.length ));
 	var time = Number($(ev.currentTarget).parent()[0].innerText.substring($(ev.currentTarget).parent()[0].innerText.indexOf('Time:')+5,$(ev.currentTarget).parent()[0].innerText.length ));
 	if (time>0) {
