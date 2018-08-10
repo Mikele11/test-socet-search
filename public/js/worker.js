@@ -252,9 +252,8 @@ $(document).on('click', '.userp', (ev) => {
 			console.log('task',$('#task').val());
 			time = $('#time').val();
 			task = $('#task').val();
-			document.getElementById('id01').style.display='none';
-		})	
-		var avatar;
+			
+					var avatar;
 		if ($('#picrscr').val()==''){
 			avatar='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXPg-87YPJhgdeqQoAlUdgF60k6yi61LlpDtSXSqjWMVa9xbWVXQ';
 		}else{
@@ -268,6 +267,10 @@ $(document).on('click', '.userp', (ev) => {
 				message: task+'Time:'+time
 			});
 		}
+			
+			document.getElementById('id01').style.display='none';
+		})	
+		
 	}
 	if (current_user_fix==$('#response').text()){
 		
@@ -291,6 +294,7 @@ $(document).on('click', '.userp', (ev) => {
 	
 	return false;
 });
+
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //--------видалення поч
 
