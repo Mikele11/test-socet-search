@@ -169,6 +169,7 @@ $(document).on('click', '.room-menu', (ev) => {
 });
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*
 $(document).on('click', '.userp', (ev) => {
 	var current_user = $(ev.currentTarget).text();
 	var current_user_fix = current_user.substring(0,current_user.indexOf('Count')-1); 
@@ -198,6 +199,75 @@ $(document).on('click', '.userp', (ev) => {
 				user_avatar: avatar,		
 				user_name: user_name,
 				message: value
+			});
+		}
+	}
+	if (current_user_fix==$('#response').text()){
+		
+		socket.emit('join', {
+			room_id: current_user_fix,
+			user_name: user_name
+		});
+		
+		$.ajax({
+			url: "/reactlist",
+			type: "GET",
+			data: '',
+			cache: false,
+			success: function(response){
+				console.log('success user');				
+			}
+		});								
+		socket.emit('fetch message', current_user_fix);
+		$('#current_room_id').text(current_user_fix);		
+	}
+	
+	return false;
+});
+*/
+$(document).on('click', '.userp', (ev) => {
+	var current_user = $(ev.currentTarget).text();
+	var current_user_fix = current_user.substring(0,current_user.indexOf('Count')-1); 
+	
+	socket.emit('create room', {
+		room_id: current_user_fix,
+		user_name: user_name
+	});
+	current_room = current_user_fix;
+	socket.emit('fetch messages', current_user_fix);
+	$('#current_room_id').text(current_user_fix);
+	$('#input-room-id').val("");
+	
+		
+	console.log('click to user',current_user_fix,current_user_fix.length,$('#response').text(),$('#response').text().length,current_user_fix!=$('#response').text());
+	if (current_user_fix!=$('#response').text()){
+		
+		var time = 0;
+		var task = '';
+		//var value = prompt("Send message to"+current_user_fix+"...:)",'');
+		document.getElementById('id01').style.display='block';
+		$('.modal-content').on('submit', (e) => {
+			e.preventDefault();
+			console.log('time',$('#time').val());
+			console.log('task',$('#task').val());
+			time = $('#time').val();
+			task = $('#task').val();
+			document.getElementById('id01').style.display='none';
+		})	
+		
+		
+		var avatar;
+		if ($('#picrscr').val()==''){
+			avatar='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXPg-87YPJhgdeqQoAlUdgF60k6yi61LlpDtSXSqjWMVa9xbWVXQ';
+		}else{
+			avatar=$('#picrscr').val();
+		}
+		if ((task!==null)&&(task>'')){
+			socket.emit('chat message', {
+				room_id: current_user_fix,
+				user_avatar: avatar,		
+				user_name: user_name,
+				message: task+'Time:'+time
 			});
 		}
 	}
@@ -267,7 +337,7 @@ $(document).on('click', '.fa-trash', (ev) => {
 			}
 			$('#message-list').empty();
 			mess.forEach((v) => {
-				$('#message-list').append('<p>' +'<img class="useravatar" src="'+ v.log.user_avatar+'">'+ v.log.user_name + '：' + v.log.message + '&nbsp;&nbsp;&nbsp;<i class="fa fa-trash"><span class="idhiden">'+v._id+'</span></i>'+'</p>');
+				$('#message-list').append('<p>' +'<img class="useravatar" src="'+ v.log.user_avatar+'">'+ v.log.user_name + '：' + v.log.message + '&nbsp;&nbsp;&nbsp;<i class="fa fa-trash"><span class="idhiden">'+v._id+'</span></i>'+'&nbsp;&nbsp;&nbsp;<i class="fas fa-check-circle"><span class="idhiden">'+v._id+'</span></i>'+'</p>');
 			});
 		}
 	});							
@@ -275,7 +345,58 @@ $(document).on('click', '.fa-trash', (ev) => {
 });
 
 //--------------------------видалення кінець
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-----------------------
+$(document).on('click', '.fa-check-circle', (ev) => {
+	var id = $(ev.currentTarget)[0].children[0].innerHTML;
+	console.log($(ev.currentTarget).parent()[0].innerText);
+	var sender = {
+		id: id
+		};
+/*	
+	$.ajax({
+		type: 'PUT',
+		data: JSON.stringify(sender),
+		contentType: 'application/json',
+		url: '/userlistsocet',						
+		success: function(data) {
+			console.log('success');			
+		},
+		error: function( jqXhr, textStatus, errorThrown ){
+			console.log(  jqXhr )
+			console.log(  textStatus )
+			console.log(  errorThrown )
+		}	
+	});
+	
+	$.ajax({
+		url: "/userlistsocet",
+		type: "GET",
+		data: '',
+		cache: false,
+		success: function(response){
+		console.log('1111',response)
+		var users=[];
+		
+			for (var i = 0; i < response.length; i++) {
+				users[i] = response[i];
+			}									
+			$('#user-list').empty();
+			users.forEach((v) => {
+				$('#user-list').append('<p class="userp">' +'<img class="useravatar_small" src="'+ v.user_avatar+'">'+ v.user_name+'<br/>'+'<span> Count time:</span>'+ v.user_paytime +'</p>');
+			}) 			 
+		},
+		error: function( jqXhr, textStatus, errorThrown ){
+			console.log(  jqXhr )
+			console.log(  textStatus )
+			console.log(  errorThrown )
+		}
+	});
+*/
+	
+	return false;
+});
 
+//!!!!!!!!!!!!!!!!!!!!!!!!--------------------------------------------
 socket.on('fetch rooms', (rooms) => {
 	$('#room-list').empty();
 	clearRooms(rooms,users);
@@ -300,7 +421,7 @@ socket.on('chat message', (data_doc) => {
 		}	
 	});	
 	if (current_room == data_doc.room_id) {
-		$('#message-list').append('<p>' +'<img class="useravatar" src="'+ data_doc.log.user_avatar+'">'+ data_doc.log.user_name + '：' + data_doc.log.message + '&nbsp;&nbsp;&nbsp;<i class="fa fa-trash"><span class="idhiden">'+data_doc._id+'</span></i>'+'</p>');
+		$('#message-list').append('<p>' +'<img class="useravatar" src="'+ v.log.user_avatar+'">'+ v.log.user_name + '：' + v.log.message + '&nbsp;&nbsp;&nbsp;<i class="fa fa-trash"><span class="idhiden">'+v._id+'</span></i>'+'&nbsp;&nbsp;&nbsp;<i class="fas fa-check-circle"><span class="idhiden">'+v._id+'</span></i>'+'</p>');
 	}
 
 });
@@ -372,9 +493,7 @@ socket.on('change', function (usersOnline){
 		console.log('on online>',usersOnline)
 		if (navigator.onLine == true){
 			var x = document.getElementsByClassName("userp").length;
-			console.log('111on online>',x)
 			$('#user-list>p').each(function( index ) {
-			console.log('2222on online>',x)	
 				var online_user = $( this ).text().substring(0,$( this ).text().indexOf('Count')-1)
 				console.log('444on online>',usersOnline.indexOf(online_user ) != -1,online_user)	
 			  if (usersOnline.indexOf(online_user ) != -1){
@@ -384,8 +503,7 @@ socket.on('change', function (usersOnline){
 			});			
 		} else {
 			console.log('off')
-			$('#user-list>p').each(function( index ) {
-			  console.log( 'each' );	
+			$('#user-list>p').each(function( index ) {	
 			  if (usersOnline.indexOf($( this ).text().substring(0,$( this ).text().indexOf('Count')-1) ) != -1){
 				$( this ).css("background","#d3d3eb");  
 			  } 
@@ -407,33 +525,3 @@ socket.on('oldcolors', function (usersOnline){
 });
 
 //-----------------------------------------------
-/*
-$(document).ready(function () {
-	setTimeout(function(){
-		if (navigator.onLine == true){
-			console.log('on')
-			//$('#user-list').css("background","greenyellow");
-			var x = document.getElementsByClassName("userp").length;
-			console.log( 'class',x);
-
-			$('#user-list>p').each(function( index ) {
-			  console.log( 'each' );	
-			  console.log( index + ": " + $( this ).text() );
-			  if ($( this ).text() == $('#response').text()){
-				$( this ).css("background","greenyellow"); 
-			  } 
-			});			
-		} else {
-			console.log('off')
-			$('#user-list>p').each(function( index ) {
-			  console.log( 'each' );	
-			  console.log( index + ": " + $( this ).text() );
-			  if ($( this ).text() == $('#response').text()){
-				$( this ).css("background","#d3d3eb");  
-			  } 
-			});
-		}
-	},5000);
-})
-
-*/
