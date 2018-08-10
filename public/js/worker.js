@@ -351,7 +351,9 @@ $(document).on('click', '.fa-trash', (ev) => {
 $(document).on('click', '.fa-check-circle', (ev) => {
 	var id = $(ev.currentTarget)[0].children[0].innerHTML;
 	console.log($(ev.currentTarget).parent()[0].innerText);
-	console.log($(ev.currentTarget).parent()[0].innerText.substring(0,$(ev.currentTarget).parent()[0].innerText.indexOf('Time:')));
+	console.log('rrrr',$(ev.currentTarget).parent()[0].innerText.indexOf('Time:'));
+	console.log('length>',$(ev.currentTarget).parent()[0].innerText.length);
+	console.log($(ev.currentTarget).parent()[0].innerText.substring($(ev.currentTarget).parent()[0].innerText.indexOf('Time:'),$(ev.currentTarget).parent()[0].innerText.length ));
 	var sender = {
 		id: id
 		};
