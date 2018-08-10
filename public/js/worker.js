@@ -351,6 +351,7 @@ $(document).on('click', '.fa-trash', (ev) => {
 $(document).on('click', '.fa-check-circle', (ev) => {
 	var id = $(ev.currentTarget)[0].children[0].innerHTML;
 	console.log($(ev.currentTarget).parent()[0].innerText);
+	console.log($(ev.currentTarget).parent()[0].innerText.substring(0,indexOf('Count:')));
 	var sender = {
 		id: id
 		};
