@@ -456,11 +456,9 @@ socket.on('change', function (usersOnline){
 		if (navigator.onLine == true){
 			var x = document.getElementsByClassName("userp").length;
 			$('#user-list>p').each(function( index ) {
-				var online_user = $( this ).text().substring(0,$( this ).text().indexOf('Count')-1)
-				console.log('444on online>',usersOnline.indexOf(online_user ) != -1,online_user)	
+				var online_user = $( this ).text().substring(0,$( this ).text().indexOf('Count')-1)	
 			  if (usersOnline.indexOf(online_user ) != -1){
-				$( this ).css("background","greenyellow"); 
-				 console.log('333on online>',$( this ).css("background","greenyellow"))				  
+				$( this ).css("background","greenyellow"); 				  
 			  } 
 			});			
 		} else {
