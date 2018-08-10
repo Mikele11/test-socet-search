@@ -349,14 +349,14 @@ $(document).on('click', '.fa-trash', (ev) => {
 //--------------------------видалення кінець
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-----------------------
 $(document).on('click', '.fa-check-circle', (ev) => {
-	var id = $(ev.currentTarget)[0].children[0].innerHTML;
+	var name = $(ev.currentTarget).parent()[0].innerText;
 	console.log($(ev.currentTarget).parent()[0].innerText);
 	console.log('rrrr',$(ev.currentTarget).parent()[0].innerText.indexOf('Time:'));
 	console.log('length>',$(ev.currentTarget).parent()[0].innerText.length);
 	console.log($(ev.currentTarget).parent()[0].innerText.substring($(ev.currentTarget).parent()[0].innerText.indexOf('Time:')+5,$(ev.currentTarget).parent()[0].innerText.length ));
 	var time = Nunber($(ev.currentTarget).parent()[0].innerText.substring($(ev.currentTarget).parent()[0].innerText.indexOf('Time:')+5,$(ev.currentTarget).parent()[0].innerText.length ));
 	var sender = {
-		id: id,
+		fname: name,
 		user_paytime: time
 		};
 	
