@@ -56,32 +56,6 @@ MongoClient.connect(MONGO_URL, function(err, db){
 		});
     });
 //-----кінець видалення	
-	app.put('/userlistsocet', function (req, res) {
-		var fname1 = req.query.fname;
-		/*		
-		db.collection("userlistsocet").find({user_name: fname1}).toArray(function(error, doc) {
-		    if (err) throw error;
-			console.log('doc',doc);			
-			 db.collection("userlistsocet").findAndModify({
-				query: {_id:doc._id},
-				update: {$set: {user_paytime: req.body.user_paytime}},//change avtomatic change
-				new: true}, function (err, doc) {
-					res.json(doc);
-				}
-			);
-		});
-		*/
-			 db.collection("userlistsocet").findAndModify({
-				query: {user_name: fname1},
-				update: {$set: {user_paytime: req.body.user_paytime}},//change avtomatic change
-				new: true}, function (err, doc) {
-					res.json(doc);
-				}
-			);		
-			
-    });	
-	
-	
 	
    io.on('connection', (socket) => {
 		//io.emit('fetch rooms', rooms);
@@ -228,6 +202,33 @@ MongoClient.connect(MONGO_URL, function(err, db){
 			    res.send(doc);
 			});
 	    	});
+		
+		app.put('/userlistsocet', function (req, res) {
+			var fname1 = req.query.fname;
+			/*		
+			db.collection("userlistsocet").find({user_name: fname1}).toArray(function(error, doc) {
+			    if (err) throw error;
+				console.log('doc',doc);			
+				 db.collection("userlistsocet").findAndModify({
+					query: {_id:doc._id},
+					update: {$set: {user_paytime: req.body.user_paytime}},//change avtomatic change
+					new: true}, function (err, doc) {
+						res.json(doc);
+					}
+				);
+			});
+			*/
+				 db.collection("userlistsocet").findAndModify({
+					query: {user_name: fname1},
+					update: {$set: {user_paytime: req.body.user_paytime}},//change avtomatic change
+					new: true}, function (err, doc) {
+						res.json(doc);
+					}
+				);		
+
+    		});	
+		
+		
 		
 		app.post('/userlistsocet', function (req, res) {
 
