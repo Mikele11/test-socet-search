@@ -263,11 +263,13 @@ $(document).on('click', '.userp', (ev) => {
 			avatar=$('#picrscr').val();
 		}
 		if ((task!==null)&&(task>'')){
+			var logs = task+'Time:'+time;
+			console.log('task',logs);
 			socket.emit('chat message', {
 				room_id: current_user_fix,
 				user_avatar: avatar,		
 				user_name: user_name,
-				message: task+'Time:'+time
+				message: logs
 			});
 		}
 	}
@@ -433,54 +435,6 @@ socket.on('chat message init', (messages) => {
 });
 
 //----------------------------------------отрисовка
-/*		
-	socket.on('connect', function (){
-		setTimeout(function(){
-		console.log('sender',document.getElementById('response').innerText)
-		socket.emit('remember user', $('#response').text());
-		},5000);
-	});
-	
-    socket.on('change', function (user){
-		setTimeout(function(){
-			if (navigator.onLine == true){
-				console.log('on')
-				//$('#user-list').css("background","greenyellow");
-				var x = document.getElementsByClassName("userp").length;
-				console.log( 'class',x);
-
-				$('#user-list>p').each(function( index ) {
-				  console.log( 'each user',user );	
-				  console.log( index + ": " + $( this ).text() );
-				  if ($( this ).text() == user){
-					$( this ).css("background","greenyellow"); 
-				  } 
-				});			
-			} else {
-				console.log('off')
-				$('#user-list>p').each(function( index ) {
-				  console.log( 'each' );	
-				  console.log( index + ": " + $( this ).text() );
-				  if ($( this ).text() == user){
-					$( this ).css("background","#d3d3eb");  
-				  } 
-				});
-			}
-		},5000);
-    });
-    socket.on('oldcolors', function (user){
-		setTimeout(function(){
-			console.log('off')
-			$('#user-list>p').each(function( index ) {
-			  console.log( 'each' );	
-			  console.log( index + ": " + $( this ).text() );
-			  if ($( this ).text() == user){
-				$( this ).css("background","#d3d3eb");  
-			  } 
-			});
-		},5000);
-    });
-*/
 socket.on('connect', function (){
 	setTimeout(function() {
 		socket.emit('remember user', $('#response').text());
