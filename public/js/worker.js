@@ -255,41 +255,6 @@ $(document).on('click', '.userp', (ev) => {
 			document.getElementById('id01').style.display='none';
 		})	
 		
-		
-		var avatar;
-		if ($('#picrscr').val()==''){
-			avatar='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXPg-87YPJhgdeqQoAlUdgF60k6yi61LlpDtSXSqjWMVa9xbWVXQ';
-		}else{
-			avatar=$('#picrscr').val();
-		}
-		if ((task!==null)&&(task>'')){
-			socket.emit('chat message', {
-				room_id: current_user_fix,
-				user_avatar: avatar,		
-				user_name: user_name,
-				message: task+'Time:'+time
-			});
-		}
-	}
-	if (current_user_fix==$('#response').text()){
-		
-		socket.emit('join', {
-			room_id: current_user_fix,
-			user_name: user_name
-		});
-		
-		$.ajax({
-			url: "/reactlist",
-			type: "GET",
-			data: '',
-			cache: false,
-			success: function(response){
-				console.log('success user');				
-			}
-		});								
-		socket.emit('fetch message', current_user_fix);
-		$('#current_room_id').text(current_user_fix);		
-	}
 	
 	return false;
 });
