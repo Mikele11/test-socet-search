@@ -262,6 +262,7 @@ $(document).on('click', '.userp', (ev) => {
 		}else{
 			avatar=$('#picrscr').val();
 		}
+		console.log('task111',task,time);
 		if ((task!==null)&&(task>'')){
 			var logs = task+'Time:'+time;
 			console.log('task',logs);
