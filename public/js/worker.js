@@ -252,22 +252,22 @@ $(document).on('click', '.userp', (ev) => {
 			console.log('task',$('#task').val());
 			time = $('#time').val();
 			task = $('#task').val();
-					
+			document.getElementById('id01').style.display='none';
+		})	
+		
+		
 		var avatar;
 		if ($('#picrscr').val()==''){
 			avatar='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXPg-87YPJhgdeqQoAlUdgF60k6yi61LlpDtSXSqjWMVa9xbWVXQ';
 		}else{
 			avatar=$('#picrscr').val();
 		}
-		console.log('task111',task,time);
 		if ((task!==null)&&(task>'')){
-			var logs = task+'Time:'+time;
-			console.log('task',logs);
 			socket.emit('chat message', {
 				room_id: current_user_fix,
 				user_avatar: avatar,		
 				user_name: user_name,
-				message: logs
+				message: task+'Time:'+time
 			});
 		}
 	}
@@ -290,6 +290,7 @@ $(document).on('click', '.userp', (ev) => {
 		socket.emit('fetch message', current_user_fix);
 		$('#current_room_id').text(current_user_fix);		
 	}
+	
 	return false;
 });
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
