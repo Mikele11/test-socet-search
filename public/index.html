@@ -160,7 +160,33 @@
 					});
 				});
 				</script>
+
+				<div id="id01" class="modal">
+				  <span onclick="document.getElementById('id01').style.display='none'" 
+				class="close" title="Close Modal">&times;</span>
+
+				  <form class="modal-content" action="">
+
+					<div class="container">
+					  <label for="uname"><b>Task</b></label>
+					  <input id="task" type="text" placeholder="Enter Task" name="uname" required>
+
+					  <label for="psw"><b>Time</b></label>
+					  <input id="time" type="number" placeholder="Enter Time" name="psw" required>
+
+					  <button type="submit">Sent</button>
+					</div>
+
+					<div class="container" style="background-color:#f1f1f1">
+					  <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+					</div>
+				  </form>
+				</div>
+
 				
+		    
+		    
+		    
 							
                 <form action="" method="post" id="create-user" class="form-inline">
                     <div class="form-group">
