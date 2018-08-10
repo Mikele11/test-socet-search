@@ -357,7 +357,7 @@ $(document).on('click', '.fa-check-circle', (ev) => {
 		fname: name,
 		user_paytime: time
 		};
-	
+	console.log('put sender',sender);
 	$.ajax({
 		type: 'PUT',
 		data: JSON.stringify(sender),
