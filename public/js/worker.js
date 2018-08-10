@@ -291,8 +291,7 @@ $(document).on('click', '.userp', (ev) => {
 			}
 
 			
-			document.getElementById('id01').style.display='none';
-		})	
+			document.getElementById('id01').style.display='none';	
 		
 /*		
 		var avatar;
