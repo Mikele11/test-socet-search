@@ -259,7 +259,7 @@ $(document).on('click', '.userp', (ev) => {
 			socket.emit('chat message', {
 				room_id: current_user_fix,
 				user_avatar: avatar,		
-				user_name: user_name,
+				user_name: $('#input-user-name').val(),
 				message: ':'+task+'Time:'+time
 			});
 		}
