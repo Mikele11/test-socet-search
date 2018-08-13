@@ -208,22 +208,30 @@ MongoClient.connect(MONGO_URL, function(err, db){
 			var fname1left = fname1.substring(0,fname1.indexOf(' '));
 			var fname1right = fname1.substring(fname1left.length+1,fname1.length);
 			var fname2 = fname1left+'  '+fname1right;
+			console.log('req.body.froom  ' +req.body.froom);
 			//{$set: {user_paytime: req.body.user_paytime}}
-			db.collection("userlistsocet").update({user_name: fname2},
+			db.collection("userlistsocet").update({user_name: req.body.froom},
 				{$inc: {user_paytime: Number(req.body.user_paytime)}},
 				{
 					multi: true
 				},
 				function(err, doc){
-					console.log('find and modified  ' +doc);
+					console.log('find and modified inc  ' +doc);
+					//res.json(doc);
+				}
+			)
+			//
+			db.collection("userlistsocet").update(
+				{user_name: fname2},
+				{$inc: {user_paytime: Number((-1)*req.body.user_paytime)}},
+				{multi: true},
+				function(err, doc){
+					console.log('find and modified dec  ' +doc);
 					res.json(doc);
 				}
 			)		
-
     		});	
-		
-		
-		
+					
 		app.post('/userlistsocet', function (req, res) {
 
 			db.collection("userlistsocet").insertOne(req.body, function(err, doc) {
